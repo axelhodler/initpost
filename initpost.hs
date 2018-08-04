@@ -8,7 +8,7 @@ main :: IO ()
 main = do
   args <- getArgs
   day <- utctDay <$> getCurrentTime
-  writeFile "2018-08-03-busconf.md" $ unlines [
+  writeFile (concat [show day, "-", "busconf.md"]) $ unlines [
     "---",
     "layout: post",
     "title: \"" ++ head args ++ "\"",
