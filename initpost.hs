@@ -7,11 +7,11 @@ import Data.Time.Calendar
 main :: IO ()
 main = do
   args <- getArgs
-  day <- utctDay <$> getCurrentTime
-  writeFile (concat [show day, "-", "busconf.md"]) $ unlines [
+  day <- currentDay
+  writeFile (concat [show day, "-", extractTitle args, ".md"]) $ unlines [
     "---",
     "layout: post",
-    "title: \"" ++ head args ++ "\"",
+    "title: \"" ++ extractTitle args ++ "\"",
     "date: " ++ show day,
     "description: \"\"",
     "category:",
@@ -19,6 +19,12 @@ main = do
     "---",
     "",
     "Content goes here"]
+
+extractTitle :: [String] -> String
+extractTitle = head
+
+currentDay :: IO Day
+currentDay = utctDay <$> getCurrentTime
 
 ---
 --layout: post
